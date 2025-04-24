@@ -6,6 +6,7 @@ import postgres from 'postgres';
 import { z } from 'zod';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { signOut } from '@/auth'
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -131,4 +132,8 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function signOutAction() {
+  await signOut({ redirectTo: '/' })
 }

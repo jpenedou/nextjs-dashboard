@@ -3,10 +3,12 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import {
-  Bars3Icon, XMarkIcon, UsersIcon, HomeIcon, DocumentCurrencyDollarIcon
+  Bars3Icon, XMarkIcon, UsersIcon, HomeIcon, DocumentCurrencyDollarIcon,
+  PowerIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { signOutAction } from '@/app/lib/actions'
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,6 +46,14 @@ export default function SideBar() {
             </Link>
           ))}
         </nav>
+
+        <div className="grow hidden md:block"></div>
+        <form action={signOutAction}>
+          <button className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600  md:px-3">
+            <PowerIcon className="w-6" />
+            <div>Sign Out</div>
+          </button>
+        </form>
       </aside>
 
       {/* Sidebar móvil con animación */}
@@ -61,7 +71,7 @@ export default function SideBar() {
             <div className="fixed inset-0 bg-black/30" />
           </Transition.Child>
 
-          <div className="fixed inset-0 flex">
+          <div className="fixed inset-0">
             <Transition.Child
               as={Fragment}
               enter="transition-transform ease-out duration-300"
@@ -71,7 +81,8 @@ export default function SideBar() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="w-52 bg-white shadow-lg p-6">
+              {/* Sidebar móvil */}
+              <Dialog.Panel className="w-52 h-full bg-white shadow-lg p-6 flex flex-col">
                 <button
                   onClick={() => setIsOpen(false)}
                   className="mb-6 self-end text-gray-600 hover:text-black"
@@ -85,13 +96,22 @@ export default function SideBar() {
                       key={name}
                       href={href}
                       className={linkClasses(href)}
-                      onClick={() => setIsOpen(false)} // cerrar al hacer clic
+                      onClick={() => setIsOpen(false)}
                     >
                       <Icon className="w-5 h-5" />
                       {name}
                     </Link>
                   ))}
                 </nav>
+
+                <div className="flex-grow" />
+
+                <form action={signOutAction}>
+                  <button className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600">
+                    <PowerIcon className="w-6" />
+                    <div>Sign Out</div>
+                  </button>
+                </form>
               </Dialog.Panel>
             </Transition.Child>
           </div>
