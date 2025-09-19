@@ -33,8 +33,8 @@ export default function SideBar() {
       </button>
 
       {/* Sidebar desktop */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-full w-52 bg-white border-r shadow-lg p-6 flex-col z-40">
-        <h2 className="text-xl font-semibold mb-6">{sidebarTitle}</h2>
+      <aside className="hidden md:flex fixed left-0 top-0 h-full w-44 bg-white border-r shadow-lg p-4 flex-col z-40">
+          <h2 className="text-lg font-semibold mb-4">{sidebarTitle}</h2>
         <nav className="space-y-3">
           {navItems.map(({ name, icon: Icon, href }) => (
             <Link key={name} href={href} className={linkClasses(href)}>
@@ -64,7 +64,7 @@ export default function SideBar() {
       >
         {/* Sidebar móvil */}
         <div
-          className="fixed inset-0 w-52 h-full bg-white shadow-lg p-6 flex flex-col z-50"
+          className="fixed inset-0 w-44 h-full bg-white shadow-lg p-4 flex flex-col z-50"
         >
           <button
             onClick={() => setIsOpen(false)}
@@ -72,7 +72,7 @@ export default function SideBar() {
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
-          <h2 className="text-xl font-semibold mb-6">{sidebarTitle}</h2>
+        <h2 className="text-lg font-semibold mb-4">{sidebarTitle}</h2>
           <nav className="space-y-3">
             {navItems.map(({ name, icon: Icon, href }) => (
               <Link
